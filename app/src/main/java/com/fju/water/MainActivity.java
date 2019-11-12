@@ -1,5 +1,7 @@
 package com.fju.water;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -13,7 +15,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
+
+import java.time.Instant;
 
 public class MainActivity extends AppCompatActivity {
     private EditText months;
@@ -32,11 +37,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                Button button=findViewById(R.id.button);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        turn();
+                    }
+                });
             }
         });
     }
-    public void turn(View view){
-        String monthString =months.getText().toString();
+    public void turn(){
+        final String monthString =months.getText().toString();
         if(!TextUtils.isEmpty(monthString)){
             float degree=Float.parseFloat(monthString);
             float fee =0f;
@@ -52,11 +64,19 @@ public class MainActivity extends AppCompatActivity {
             else if(degree>=51){
                 fee =degree*12.075f-110.25f;
             }
-            new AlertDialog.Builder(MainActivity.this)
-                    .setTitle("每月抄表費用")
-                    .setMessage("費用"+ fee)
-                    .setPositiveButton("ok",null)
-                    .show();
+            Intent intent=new Intent(this,ResultActivity.class);
+            startActivity(intent);
+           // new AlertDialog.Builder(MainActivity.this)
+            //        .setTitle("每月抄表費用")
+            //        .setMessage("費用"+ fee)
+            //        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            //            @Override
+           //             public void onClick(DialogInterface dialog, int which) {
+           //                 months.setText("");
+         //                   nexts.setText("");
+           //             }
+           //         })
+            //        .show();
         }
         else{
             String nextString=nexts.getText().toString();
@@ -78,7 +98,13 @@ public class MainActivity extends AppCompatActivity {
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle("隔月抄表費用")
                         .setMessage("費用"+ fee)
-                        .setPositiveButton("ok",null)
+                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                months.setText("");
+                                nexts.setText("");
+                            }
+                        })
                         .show();
             }
         }
