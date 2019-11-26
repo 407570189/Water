@@ -61,19 +61,19 @@ public class MainActivity extends AppCompatActivity {
                         fee =degree*12.075f-110.25f;
                     }
                     Intent intent=new Intent(MainActivity.this,ResultActivity.class);
-                    intent.putExtra("fee",fee);
+                    intent.putExtra(getString(R.string.extra_fee),fee);
                     startActivity(intent);
                     // new AlertDialog.Builder(MainActivity.this)
-                    //        .setTitle("每月抄表費用")
-                    //        .setMessage("費用"+ fee)
-                    //        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    //            @Override
-                    //             public void onClick(DialogInterface dialog, int which) {
-                    //                 months.setText("");
-                    //                   nexts.setText("");
-                    //             }
-                    //         })
-                    //        .show();
+                     //       .setTitle("每月抄表費用")
+                       //     .setMessage(getString(R.string.fee)+ fee)
+                       //     .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                        //        @Override
+                       //          public void onClick(DialogInterface dialog, int which) {
+                       //              months.setText("");
+                       //                nexts.setText("");
+                       //          }
+                       //      })
+                       //     .show();
                 }
                 else{
                     String nextString=nexts.getText().toString();
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
            //         })
             //        .show();
         }
-        else{
+      /*  else{
             String nextString=nexts.getText().toString();
             if (!TextUtils.isEmpty(nextString)){
                 float degree=Float.parseFloat(nextString);
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .show();
             }
-        }
+        }*/
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
