@@ -16,13 +16,17 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import java.time.Instant;
 
 public class MainActivity extends AppCompatActivity {
     private EditText months;
     private EditText nexts;
+    boolean isNext =false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         months =findViewById(R.id.month);
-        nexts=findViewById(R.id.next);
+
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,8 +45,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        Switch sw=findViewById(R.id.switch1);
+        sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isNext=isChecked;
+                TextView text=findViewById(R.id.type);
+                text.setText(isNext?getText(R.string.every_other_monthly):getText(R.string.monthly));
+            }
+        });
         Button button=findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 String monthString =months.getText().toString();
