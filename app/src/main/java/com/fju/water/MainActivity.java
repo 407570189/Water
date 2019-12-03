@@ -7,11 +7,14 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.Toolbar;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,9 +27,41 @@ import android.widget.TextView;
 import java.time.Instant;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG ="TAG" ;
     private EditText months;
     private EditText nexts;
     boolean isNext =false;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG,"onStart");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG,"onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG,"onDestory");
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        Log.d(TAG,"onPause");
+    }
+
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        Log.d(TAG,"onRestart");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
